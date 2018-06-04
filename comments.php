@@ -16,10 +16,10 @@
     <link href="styles/blog.css" rel="stylesheet">
 </head>
 <body>
-    <?php include('header.php'); ?>
+    <?php include('include/header.php'); ?>
 
-    <?php include('sidebar.php'); ?>
+    <?php include('include/sidebar.php'); ?>
 
-    <?php include('footer.php'); ?>
+    <?php include('include/footer.php'); ?>
 </body>
 </html>
