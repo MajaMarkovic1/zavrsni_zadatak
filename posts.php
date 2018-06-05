@@ -10,8 +10,8 @@
             <?php
 
                 // pripremamo upit
-                $posts = database("SELECT * FROM posts ORDER BY posts.created_at DESC", $connection);
-        
+                $posts = database("SELECT * FROM posts ORDER BY posts.created_at DESC", $connection, 'fetchAll');
+        //var_dump($posts);
                 foreach ($posts as $post) {
             ?>
 
