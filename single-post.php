@@ -18,16 +18,24 @@
                 ON p.id = c.post_id 
                 WHERE p.id = {$_GET['post_id']}";
 
-                $singlePost = database($sql, $connection, 'fetch');
-                    
+                $posts = database($sql, $connection, 'fetchAll');
+                
+                $comments = [];
+                // var_dump($posts);
+                foreach($posts as $post){
+                  
+                    array_push($comments, ['user' => $post['user'], 'text' => $post['text']]);
+
+                }
+                // var_dump($comments);
                 
         
             ?>
             <div class="blog-post">
-                <h2 class="blog-post-title"><?php echo $singlePost['title']?></h2>
-                <p class="blog-post-meta"><?php echo $singlePost['created_at']?> by <a href="#"><?php echo $singlePost['author']?></a></p>
+                <h2 class="blog-post-title"><?php echo $posts[0]['title']?></h2>
+                <p class="blog-post-meta"><?php echo $posts[0]['created_at']?> by <a href="#"><?php echo $posts[0]['author']?></a></p>
 
-                <p><?php echo $singlePost['body']?></p>
+                <p><?php echo $posts[0]['body']?></p>
             </div><!-- /.blog-post -->
 
             <?php
@@ -36,9 +44,8 @@
             <div>Comments: </div><br>
             <?php
                 
-                $comments = database($sql, $connection, 'fetchAll');
-                //var_dump($comments);
-                    foreach ($comments as $comment){
+                // var_dump($singlePost);
+                foreach ($comments as $comment){
                 
             ?>
             <ul>
