@@ -50,27 +50,31 @@
 
             </div><!-- /.blog-post -->
 
-            <button onclick='delbtn()' class='btn' id='delbtn'>Delete post</button>
+
+
+            <form action='delete-post.php' method='POST' onsubmit='return myFunction()'>
+                    <input name='post_id' type='hidden' value='<?php echo $_GET['post_id']?>'>
+                    <button name='del-post' class='btn' id='delbtn'>Delete post</button>
+               
+            </form>
             <script>
-                // var delbtn = document.getElementById('delbtn')
-                // var blog_post = document.getElementsByClassName('blog-post')
-                
-                function delbtn(){
-                    var con = confirm('are you sure')
-                    if (con == true){
-                        // database('DELETE FROM posts1 WHERE id = '.$_GET['post_id'].' ', $connection);
-                
-               //delbtn.addEventListener('click', delbtn())
+            
+                function myFunction() {
+                   
+                    var del = prompt("Do you really want to delete this post?", 'Ok');
+                    if (del != null) {
+                        return true
                     } else {
-                       
+                        
+                        
                     }
+                    //document.getElementById("").innerHTML = txt;
                 }
-                </script>
-                    <?php// database('DELETE FROM posts1 WHERE id = '.$_GET['post_id'].' ', $connection);
-                
-               //delbtn.addEventListener('click', delbtn())
-              
-               ?>
+            
+            </script>
+            
+         
+                   
        
             <form action='comments.php' method='POST'>
                 Ime: <br><input name='name' type='text'><br>
@@ -98,9 +102,7 @@
                 // var_dump($singlePost);
                 foreach ($comments as $comment){
                     //var_dump($comment);
-                    
-                   
-                    
+               
             ?>
            
                
