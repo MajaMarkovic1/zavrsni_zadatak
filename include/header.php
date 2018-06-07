@@ -1,3 +1,24 @@
+<?php
+    // ako su mysql username/password i ime baze na vasim racunarima drugaciji
+    // obavezno ih ovde zamenite
+    $servername = "localhost";
+    $username = "root";
+    $password = "vivify";
+    $dbname = "blog1";
+
+    try {
+        $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
+        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    catch(PDOException $e)
+    {
+        echo $e->getMessage();
+    }
+
+  
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,11 +42,9 @@
         <div class="blog-masthead">
             <div class="container">
                 <nav class="nav">
-                    <a class="nav-link active" href="#">Home</a>
-                    <a class="nav-link" href="#">New features</a>
-                    <a class="nav-link" href="#">Press</a>
-                    <a class="nav-link" href="#">New hires</a>
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link active" href="posts.php">Home</a>
+                    <a class="nav-link" href="create-post">Create</a>
+                   
                 </nav>
             </div>
         </div>

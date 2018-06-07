@@ -3,8 +3,8 @@
     // obavezno ih ovde zamenite
     $servername = "localhost";
     $username = "root";
-    $password = "vivify";
-    $dbname = "blog1";
+    $password = "";
+    $dbname = "blog";
 
     try {
         $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -16,8 +16,9 @@
         echo $e->getMessage();
     }
 
-    function database($sql, $connection){
+    
 // pripremamo upit
+$sql = "SELECT * FROM posts1 ORDER BY posts1.created_at DESC limit 5";
         $statement = $connection->prepare($sql);
 
         // izvrsavamo upit
@@ -29,7 +30,26 @@
 
         // punimo promenjivu sa rezultatom upita
 
-        return $statement->fetchAll();
-    }
+        $posts = $statement->fetchAll();
+    
     
 ?>
+
+<aside class="col-sm-3 ml-sm-auto blog-sidebar">
+        <div class="sidebar-module sidebar-module-inset">
+            <h4>Latest posts</h4>
+            <ul>
+            <?php
+                
+                //var_dump($posts);
+                foreach ($posts as $post) {
+            ?>
+                <a href='single-post.php?post_id=<?php echo $post['id']?>'><li><?php echo $post['title']?></li></a>
+                <?php } ?>
+            </ul>
+            <!-- <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p> -->
+        </div>
+    
+</aside>
+
+

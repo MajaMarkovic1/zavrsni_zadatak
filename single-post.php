@@ -1,7 +1,4 @@
-<?php include('db.php')?>
-
 <?php include('include/header.php'); ?>
-
 
 
 <main role="main" class="container">
@@ -11,60 +8,133 @@
         <div class="col-sm-8 blog-main">
 
             <?php
-                if (isset($_GET['post_id'])) {
-                    
-                // pripremamo upit
-                $sql = "SELECT p.created_at,p.author, p.title, p.body, c.author as user, c.text
-                  
+            if (isset($_GET['post_id'])) {
+                            
+                $sql = "SELECT p.id, p.created_at,p.author, p.title, p.body, c.author as user, c.id as comment_id, c.text, c.post_id
+                                
                 FROM posts as p LEFT JOIN comments as c
                 ON p.id = c.post_id 
                 WHERE p.id = {$_GET['post_id']}";
 
-                $posts = database($sql, $connection, 'fetchAll');
-                
+                // pripremamo upit
+                $statement = $connection->prepare($sql);
+                                
+                // izvrsavamo upit
+                $statement->execute();
+
+                // zelimo da se rezultat vrati kao asocijativni niz.
+                // ukoliko izostavimo ovu liniju, vratice nam se obican, numerisan niz
+                $statement->setFetchMode(PDO::FETCH_ASSOC);
+
+                // punimo promenjivu sa rezultatom upita
+
+                $posts = $statement->fetchAll();
+
                 $comments = [];
                 //var_dump($posts);
                 foreach($posts as $post){
                   
-                    array_push($comments, ['user' => $post['user'], 'text' => $post['text']]);
+                    array_push($comments, ['comment_id' => $post['comment_id'], 'user' => $post['user'], 'text' => $post['text']]);
 
                 }
-                // var_dump($comments);
+                //var_dump($comments);
                 
         
             ?>
-            <div class="blog-post">
+            <div class="blog-post" >
                 
                 <h2 class="blog-post-title"><?php echo $post['title']?></h2>
                 <p class="blog-post-meta"><?php echo $post['created_at']?> by <a href="#"><?php echo $post['author']?></a></p>
 
                 <p><?php echo $post['body']?></p>
+
             </div><!-- /.blog-post -->
 
-            <form action='#' method='POST'>
+            <button onclick='delbtn()' class='btn' id='delbtn'>Delete post</button>
+            <script>
+                // var delbtn = document.getElementById('delbtn')
+                // var blog_post = document.getElementsByClassName('blog-post')
+                
+                function delbtn(){
+                    var con = confirm('are you sure')
+                    if (con == true){
+                        // database('DELETE FROM posts1 WHERE id = '.$_GET['post_id'].' ', $connection);
+                
+               //delbtn.addEventListener('click', delbtn())
+                    } else {
+                       
+                    }
+                }
+                </script>
+                    <?php// database('DELETE FROM posts1 WHERE id = '.$_GET['post_id'].' ', $connection);
+                
+               //delbtn.addEventListener('click', delbtn())
+              
+               ?>
+       
+            <form action='comments.php' method='POST'>
+                Ime: <br><input name='name' type='text'><br>
+               
+                Komentar: <br><input name='comment' type='text'><br><br>
+                <input type="hidden" name="post_id" value=<?php echo $post['id'] ?>>
+                <button type='submit' name='submit'>Submit</button><br>
+                
+                <?php if (!empty($_GET['error'])) {  ?>
+                    <div class="alert alert-danger"><strong>Danger!</strong> All fields are required.</div>
+                <?php } ?>
                 
             </form>
 
-            <button type='button' id='btn' class='btn'>Hide comments</button>
+    
+
+        <div class='koment'>
+                    
+
+            <br><button type='button' id='btn' class='btn'>Hide comments</button>
             
-            <div >Comments: </div><br>
             <ul id="comments">
             <?php
-                
+                 
                 // var_dump($singlePost);
                 foreach ($comments as $comment){
-                
+                    //var_dump($comment);
+                    
+                   
+                    
             ?>
-            
-                <li ><?php echo $comment['user'] ?><br><?php echo $comment['text'] ?></li><hr>
+           
+               
+            <form action='delete-comment.php' method='POST'>
+                <input name='comm' type='hidden' value='<?php echo $comment['comment_id']?>'>
+                <input name='post_id' type='hidden' value='<?php echo $_GET['post_id']?>'>
+                
+                <li ><?php echo $comment['user']; echo "<br>"; echo $comment['text'] ?></li>
+                <button name='delete' class='btn' type='submit'>Delete</button><hr>
 
+            </form>
+           
+           
             
             <?php
-                } 
-            } else {
-                echo('post_id nije prosledjen kroz $_GET');
-            }
-            ?>
+            
+                if ($comment['user'] === null && $comment['text'] === null){?>
+                    <script> 
+                        var myBtn = document.getElementById('btn');
+                        var comments = document.getElementById("comments")
+                        myBtn.style.display = "none"
+                        comments.style.display = "none"
+                        </script>
+                <?php } ?>
+                <?php
+                
+            }?>
+        </div>
+            <?php
+             } else {
+                    echo('post_id nije prosledjen kroz $_GET');
+                }
+                
+                ?>
                 </ul>
             
         </div><!-- /.blog-main -->
