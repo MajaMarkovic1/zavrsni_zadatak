@@ -12,9 +12,10 @@
             <button type='submit' name='submit'>Submit</button>
             <?php
         if (isset($_POST['submit'])){
-            if (!empty($_POST['title']) || !empty($_POST['author']) || !empty($_POST['body']) || !empty($_POST['created_at'])){
+            if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['body']) && !empty($_POST['created_at'])){
                 
-                $sql = "INSERT INTO posts (title, body, author, created_at) VALUES (
+                $sql = "INSERT INTO posts ( title, body, author, created_at) VALUES (
+                    
                     '{$_POST['title']}',
                     '{$_POST['body']}',
                     '{$_POST['author']}',
@@ -25,7 +26,7 @@
                                 
                     // izvrsavamo upit
                     $statement->execute();
-                //header('location:posts.php');
+                    header('location:posts.php');
             } else { ?>
                 <div class="alert alert-danger"><strong>Danger!</strong> You must fill all the fields.</div>
             <?php }
