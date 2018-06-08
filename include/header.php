@@ -15,14 +15,13 @@
     {
         echo $e->getMessage();
     }
-
-  
+      
 ?>
-
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -44,7 +43,7 @@
                 <nav class="nav">
                     <a class="nav-link active" href="posts.php">Home</a>
                     <a class="nav-link" href="create-post.php">Create</a>
-                   
+                    
                 </nav>
             </div>
         </div>
@@ -56,3 +55,4 @@
             </div>
         </div>
     </header>
+
