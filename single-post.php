@@ -50,7 +50,7 @@
             <div class="blog-post" >
                 
                 <h2 class="blog-post-title"><?php echo $post['title']?></h2>
-                <p class="blog-post-meta"><?php echo $post['created_at']?> by <a href="#"><?php echo $post['first_name']?></a></p>
+                <p class="blog-post-meta"><?php echo $post['created_at']?> by <a href="#"><?php echo $post['first_name'].' '.$post['last_name']?></a></p>
                 <p><?php echo $post['body']?></p>
 
             </div><!-- /.blog-post -->
@@ -94,6 +94,7 @@
             <br><button type='button' id='btn' class='btn'>Hide comments</button>
             
             <ul id="comments">
+            <p>Comments: </p>
             <?php  
                 // var_dump($singlePost);
                 foreach ($comments as $comment){
@@ -107,8 +108,8 @@
             <form action='delete-comment.php' method='POST'>
                 <input name='comm' type='hidden' value='<?php echo $comment['comment_id']?>'>
                 <input name='post_id' type='hidden' value='<?php echo $_GET['post_id']?>'>
-                <li ><?php echo $comment['user']; echo "<br>"; echo $comment['text'] ?></li>
-                <button name='delete' class='btn' type='submit'>Delete</button><hr>
+                <li id='del-com-li'><?php echo $comment['user']; echo "<br>"; echo $comment['text'] ?></li>
+                <button id='del-btn-com' name='delete' class='btn' type='submit'>Delete</button><hr>
             </form>
            
             <!-- sakrij komentare -->
