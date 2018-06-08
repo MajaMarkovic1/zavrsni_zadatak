@@ -7,7 +7,8 @@
             Author: <br><input name='first_name' type='text'><br>
             text: <br><textarea name='body' type='text' rows='6'></textarea><br>
             Date: <br><input name='created_at' type='text'><br>
-            <button type='submit' name='submit' >Submit</button>
+            <button class='btn' type='submit' name='submit' >Submit</button>
+
             <script>
              function validateForm() {
                  var t = document.forms["form"]["title"].value;
@@ -21,6 +22,7 @@
                  }
              }
             </script>
+            
             <?php
            
                 if (isset($_POST['submit'])){
