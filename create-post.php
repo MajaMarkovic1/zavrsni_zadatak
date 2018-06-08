@@ -2,21 +2,22 @@
 
 <main role="main" class="container">
     <div class="row">
-        <form name='form' action='' method='POST' onsubmit='return validateForm()'>
+    <div class="col-sm-8 blog-main">
+        <form id='post-text' name='form' action='' method='POST' onsubmit='return validateForm()'>
             Title: <br><input name='title' type='text'><br>
             Author: <br><input name='first_name' type='text'><br>
-            text: <br><textarea name='body' type='text' rows='6'></textarea><br>
+            Text: <br><textarea  name='body' type='text' rows='6'></textarea><br>
             Date: <br><input name='created_at' type='text'><br>
             <button class='btn' type='submit' name='submit' >Submit</button>
 
             <script>
              function validateForm() {
-                 var t = document.forms["form"]["title"].value;
-                 var a = document.forms["form"]["first_name"].value;
+                 var title = document.forms["form"]["title"].value;
+                 var author = document.forms["form"]["first_name"].value;
                  var text = document.forms["form"]["body"].value;
-                 var d = document.forms["form"]["created_at"].value;
+                 var date = document.forms["form"]["created_at"].value;
                  
-                 if (t,a,text,d == "") {
+                 if (title,author,text,date == "") {
                      alert("All fields must be filled out");
                      return false;
                  }
@@ -45,6 +46,7 @@
                 }
             ?>
         </form>
+        </div>
         <?php include('include/sidebar.php'); ?>
     <div><!-- /.row -->
 </main><!-- /.container -->
