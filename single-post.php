@@ -11,7 +11,7 @@
                     c.post_id, u.first_name, u.last_name
                                     
                     FROM posts as p 
-                    join users as u
+                    JOIN users as u
                     on p.user_id = u.id
                     LEFT JOIN comments as c 
                     ON p.id = c.post_id 
