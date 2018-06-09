@@ -1,25 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+<?php 
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "blog1";
 
-    <title>Vivify Blog</title>
+    try {
+        $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
+        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    catch(PDOException $e)
+    {
+        echo $e->getMessage();
+    }
+   
+    if (isset($_POST['submit'])){
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        if(!empty($_POST['name']) || !empty($_POST['comment'])) {
+    
+            $sql = "INSERT INTO comments (author, text, post_id) 
+            VALUES ('{$_POST['name']}', '{$_POST['comment']}', '{$_POST['post_id']}')";
+            // pripremamo upit
+            $statement = $connection->prepare($sql);
+        
+            // izvrsavamo upit
+            $statement->execute();
+            
+            //echo $id;
+            header('Location: single-post.php?post_id='.$_POST['post_id'].'');
+            
+        } else {
+            
+            header('Location: single-post.php?post_id='.$_POST['post_id'].'&error=1');
+            
+        }
+    } 
 
-    <!-- Custom styles for this template -->
-    <link href="styles/blog.css" rel="stylesheet">
-</head>
-<body>
-    <?php include('include/header.php'); ?>
+?>
 
-    <?php include('include/sidebar.php'); ?>
 
-    <?php include('include/footer.php'); ?>
-</body>
-</html>

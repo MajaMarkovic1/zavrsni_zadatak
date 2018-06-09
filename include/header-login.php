@@ -1,5 +1,5 @@
 <?php
- session_start();
+ 
     // ako su mysql username/password i ime baze na vasim racunarima drugaciji
     // obavezno ih ovde zamenite
     $servername = "localhost";
@@ -42,17 +42,16 @@
         <div class="blog-masthead">
             <div class="container">
                 <nav class="nav">
-                    <a id='nav-link-home' class="nav-link" href="posts.php?user=<?php echo $_SESSION['firstName']?>">Home</a>
-                    <a id='nav-link-create' class="nav-link" href="create-post.php?user=<?php echo $_SESSION['firstName']?>">Create</a>
-                    <a id='nav-link-logout' class="nav-link" href="index.php">Log out</a>
+                    <a id='nav-link-login' class="nav-link" href="login.php">Log in</a>
+                    <a id='nav-link-register' class="nav-link" href="register.php">Register</a>
                     
                 </nav>
                 <script>
 
-                    if (document.location.href.indexOf('create') > -1) {
-                        document.getElementById('nav-link-create').className += ' active'
-                  } else {
-                        document.getElementById('nav-link-home').className += ' active'
+                    if (document.location.href.indexOf('login') > -1) {
+                        document.getElementById('nav-link-login').className += ' active'
+                    } else  {
+                        document.getElementById('nav-link-register').className += ' active'
                     }
 
                     // Loop through the buttons and add the active class to the current/clicked button
@@ -60,11 +59,6 @@
             </div>
         </div>
 
-        <div class="blog-header">
-            <div class="container">
-                <h1 class="blog-title">The Bootstrap Blog</h1>
-                <p class="lead blog-description">An example blog template built with Bootstrap.</p>
-            </div>
-        </div>
+       
     </header>
 
