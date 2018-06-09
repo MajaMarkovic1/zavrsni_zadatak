@@ -1,9 +1,10 @@
 <?php
+ session_start();
     // ako su mysql username/password i ime baze na vasim racunarima drugaciji
     // obavezno ih ovde zamenite
     $servername = "localhost";
     $username = "root";
-    $password = "vivify";
+    $password = "";
     $dbname = "blog1";
 
     try {
@@ -15,14 +16,13 @@
     {
         echo $e->getMessage();
     }
-
-  
+      
 ?>
-
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -42,10 +42,21 @@
         <div class="blog-masthead">
             <div class="container">
                 <nav class="nav">
-                    <a class="nav-link active" href="posts.php">Home</a>
-                    <a class="nav-link" href="create-post.php">Create</a>
-                   
+                    <a id='nav-link-home' class="nav-link" href="posts.php?user=<?php echo $_SESSION['firstName']?>">Home</a>
+                    <a id='nav-link-create' class="nav-link" href="create-post.php?user=<?php echo $_SESSION['firstName']?>">Create</a>
+                    <a id='nav-link-logout' class="nav-link" href="index.php">Log out</a>
+                    
                 </nav>
+                <script>
+
+                    if (document.location.href.indexOf('create') > -1) {
+                        document.getElementById('nav-link-create').className += ' active'
+                  } else {
+                        document.getElementById('nav-link-home').className += ' active'
+                    }
+
+                    // Loop through the buttons and add the active class to the current/clicked button
+                    </script>
             </div>
         </div>
 
@@ -56,3 +67,4 @@
             </div>
         </div>
     </header>
+
