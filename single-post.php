@@ -7,8 +7,8 @@
 
                 if (isset($_GET['post_id'])) {
                                 
-                    $sql = "SELECT p.id, p.created_at, p.title, p.body, c.author as user, c.id as comment_id, c.text,
-                    c.post_id, u.first_name, u.last_name
+                    $sql = "SELECT p.created_at, p.title, p.body, c.author as user, c.id as comment_id, c.text,
+                     u.first_name, u.last_name
                                     
                     FROM posts as p 
                     join users as u
@@ -86,7 +86,7 @@
                 <input name='name' type='text'><br>
                 <label>Comment: </label><br>
                 <input name='comment' type='text'><br><br>
-                <input type="hidden" name="post_id" value=<?php echo $post['id'] ?>>
+                <input type="hidden" name="post_id" value=<?php echo $_GET['post_id'] ?>>
                 <button type='submit' class='btn' name='submit'>Submit</button><br>
                 
                 <?php if (!empty($_GET['error'])) {  ?>
