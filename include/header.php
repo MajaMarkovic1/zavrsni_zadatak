@@ -45,7 +45,9 @@
                     <a id='nav-link-home' class="nav-link" href="posts.php?user=<?php echo $_SESSION['firstName']?>">Home</a>
                     <a id='nav-link-create' class="nav-link" href="create-post.php?user=<?php echo $_SESSION['firstName']?>">Create</a>
                     <a id='nav-link-logout' class="nav-link" href="index.php">Log out</a>
-                    
+                    <label class="nav-link">Profile: </label>
+                    <p class="nav-link"><?php if (isset($_SESSION['firstName'])){
+                    echo $_SESSION['firstName'].' '.$_SESSION['lastName']; } else {echo 1;}?></p>
                 </nav>
                 <script>
 
@@ -55,7 +57,6 @@
                         document.getElementById('nav-link-home').className += ' active'
                     }
 
-                    // Loop through the buttons and add the active class to the current/clicked button
                     </script>
             </div>
         </div>
