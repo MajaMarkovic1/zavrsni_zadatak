@@ -1,12 +1,10 @@
 <?php
-
     // ako su mysql username/password i ime baze na vasim racunarima drugaciji
     // obavezno ih ovde zamenite
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "blog1";
-
     try {
         $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         // set the PDO error mode to exception
@@ -42,20 +40,22 @@
         <div class="blog-masthead">
             <div class="container">
                 <nav class="nav">
+                    <a id='nav-link-home' class="nav-link" href="index.php">Home</a>
                     <a id='nav-link-login' class="nav-link" href="login.php">Log in</a>
                     <a id='nav-link-register' class="nav-link" href="register.php">Register</a>
+
                     <p class="nav-link"><?php //if (isset($_SESSION['firstName'])){
                    // echo $_SESSION['firstName'].' '.$_SESSION['lastName']; } else {echo 1;}?></p>
+
                 </nav>
                 <script>
-
                     if (document.location.href.indexOf('login') > -1) {
                         document.getElementById('nav-link-login').className += ' active'
+                    } else if (document.location.href.indexOf('index') > -1){
+                        document.getElementById('nav-link-home').className += ' active'
                     } else  {
                         document.getElementById('nav-link-register').className += ' active'
                     }
-
-                    // Loop through the buttons and add the active class to the current/clicked button
                     </script>
             </div>
         </div>
