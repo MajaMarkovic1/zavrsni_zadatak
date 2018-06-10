@@ -17,17 +17,30 @@
 
 
     if (isset($_POST['del-post'])){
+<<<<<<< HEAD
          
+=======
+        
+        $sql1 = 'DELETE FROM comments WHERE post_id ='.$_POST['post_id'].'';
+        $statement1 = $connection->prepare($sql1);
+                    
+        // izvrsavamo upit
+        $statement1->execute();
+>>>>>>> master
          $sql = 'DELETE FROM posts WHERE id ='.$_POST['post_id'].'';
          $statement = $connection->prepare($sql);
                      
          // izvrsavamo upit
          $statement->execute();
+<<<<<<< HEAD
          $sql1 = 'DELETE FROM comments WHERE post_id ='.$_POST['post_id'].'';
          $statement1 = $connection->prepare($sql1);
                      
          // izvrsavamo upit
          $statement1->execute();
+=======
+         
+>>>>>>> master
          
         header('Location: posts.php');
         
