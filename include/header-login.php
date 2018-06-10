@@ -42,6 +42,7 @@
         <div class="blog-masthead">
             <div class="container">
                 <nav class="nav">
+                    <a id='nav-link-home' class="nav-link" href="index.php">Home</a>
                     <a id='nav-link-login' class="nav-link" href="login.php">Log in</a>
                     <a id='nav-link-register' class="nav-link" href="register.php">Register</a>
 
@@ -53,6 +54,8 @@
 
                     if (document.location.href.indexOf('login') > -1) {
                         document.getElementById('nav-link-login').className += ' active'
+                    } else if (document.location.href.indexOf('index') > -1){
+                        document.getElementById('nav-link-home').className += ' active'
                     } else  {
                         document.getElementById('nav-link-register').className += ' active'
                     }
